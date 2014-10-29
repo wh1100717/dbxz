@@ -11,6 +11,8 @@ from dbxzSpider.config import SpiderConfig
 
 max_page = 1
 
+group = ["kaopulove", "haixiuzu"]
+
 class byhxSpider(Spider):
     name = "byhx"
     allowed_domains = ["douban.com"]
@@ -19,10 +21,10 @@ class byhxSpider(Spider):
     ]
 
     def parse(self, response):
-        count = 1
+        count = 0
         while True:
             if count > max_page: break
-            req = Request(url="http://www.douban.com/group/haixiuzu/discussion?start="+str(count * 25),callback = self.parse_group)
+            req = Request(url="http://www.douban.com/group/"+group[count % len(group)]+"/discussion?start="+str(count / len(group) * 25),callback = self.parse_group)
             count += 1
             yield req
 
@@ -53,5 +55,7 @@ class byhxSpider(Spider):
 
         imgs = item['imgs']
         if type(imgs) != list: item['imgs'] = [imgs]
+
+        item['group'] = item['group'].split('/')[-2]
 
         return item

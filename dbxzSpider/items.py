@@ -19,6 +19,7 @@ class topicItem(Item):
     url = Field()
     name = Field()
     imgs = Field()
+    group = Field()
     author_name = Field()
     author_id = Field()
     create_time = Field()

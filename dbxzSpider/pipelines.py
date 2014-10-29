@@ -21,7 +21,7 @@ class ProcessPipeline(object):
             self.download_pic(item)
             self.upload_pic(item)
         else:
-            print "topic has been saved in mongodb!"
+            print "topic exists in mongodb!"
             raise DropItem(item)
         return item
 
